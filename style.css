@@ -1,11 +1,7 @@
-#block > h2 {
-  background-color: blueviolet;
+.btn{
+  font-size: 20px;
+  color:violet;
 }
-
-/* #block > ol > li:first-child {
+.active{
   background-color: pink;
 }
-
-#block > ol > li:last-child {
-  background-color: pink;
-} */
