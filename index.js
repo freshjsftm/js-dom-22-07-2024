@@ -1,28 +1,25 @@
-const wrapper = document.getElementById('wrapper');
-const block = document.getElementById('block');
-// console.dir(block);
-// wrapper.addEventListener('mousemove', (event)=>{
-//   block.style.left = event.clientX + 'px';
-//   block.style.top = event.clientY + 'px';
-// })
+const products = document.querySelectorAll('#shop .product');
+const check = document.querySelector('#shop h1 span');
 
-let x = 0;
-let y = 0;
-const step = 5;
+// виділити зеленим фоном продукти які мають катогорію fruits&veget
+products.forEach((product) => {
+  if (product.dataset.category === 'fruits&veget') {
+    product.style.backgroundColor = 'lightgreen';
+  }
+});
 
-window.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowLeft') {
-    x-=step;
+let summa = 0;
+check.textContent = summa;
+const addToCart = (event) => {
+  summa += Number(event.currentTarget.dataset.price);
+  if (summa > 150) {
+    alert(' ви досягнете ліміт на картці ');
+    event.currentTarget.removeEventListener('click', addToCart);
+    return;
   }
-  if (event.key === 'ArrowRight') {
-    x+=step;
-  }
-  if (event.key === 'ArrowUp') {
-    y-=step;
-  }
-  if (event.key === 'ArrowDown') {
-    y+=step;
-  }
-  block.style.left = x + 'px';
-  block.style.top = y + 'px';
+  event.currentTarget.style.backgroundColor = 'pink';
+  check.textContent = summa;
+};
+products.forEach((product) => {
+  product.addEventListener('click', addToCart);
 });
