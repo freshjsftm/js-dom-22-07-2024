@@ -1,25 +1,19 @@
-const products = document.querySelectorAll('#shop .product');
-const check = document.querySelector('#shop h1 span');
+const root = document.getElementById('root');
+console.dir(root);
 
-// виділити зеленим фоном продукти які мають катогорію fruits&veget
-products.forEach((product) => {
-  if (product.dataset.category === 'fruits&veget') {
-    product.style.backgroundColor = 'lightgreen';
-  }
+const h1 = document.createElement('h1');
+h1.textContent = 'i create h1';
+h1.classList.add('heading');
+h1.addEventListener('click', () => {
+  h1.style.color = 'red';
 });
 
-let summa = 0;
-check.textContent = summa;
-const addToCart = (event) => {
-  summa += Number(event.currentTarget.dataset.price);
-  if (summa > 150) {
-    alert(' ви досягнете ліміт на картці ');
-    event.currentTarget.removeEventListener('click', addToCart);
-    return;
-  }
-  event.currentTarget.style.backgroundColor = 'pink';
-  check.textContent = summa;
-};
-products.forEach((product) => {
-  product.addEventListener('click', addToCart);
-});
+const btn = document.createElement('button');
+btn.textContent = 'click me';
+
+const em = document.createElement('em');
+em.textContent = '!!!!!';
+
+h1.append(em);
+
+root.append(h1, btn);
