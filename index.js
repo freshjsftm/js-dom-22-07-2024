@@ -1,24 +1,22 @@
-// Promise
+const root = document.getElementById('root');
 
-// new Promise(executor)
-// executor - function
-
-const myPromise = new Promise((resolve, reject) => {
-  const random = Math.random();
-  if (random > 0.5) {
-    resolve('All good! random = '+ random);
-  } else {
-    reject('Error! random = '+ random);
-  }
-});
-
-myPromise
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    console.log('finally');
+function loadImage(path, alt) {
+  const image = document.createElement('img');
+  image.src = path;
+  return new Promise((resolve, reject) => {
+    image.addEventListener('load', () => {
+      image.alt = alt;
+      resolve(image);
+    });
+    image.addEventListener('error', () => {
+      reject(new Error('invalid path'));
+    });
   });
+}
+
+const path =
+  'https://sb.ecobnb.net/app/uploads/sites/3/2021/09/Progetto-senza-titolo-3.jpg';
+const alt = 'sea';
+loadImage(path, alt)
+  .then((pic) => root.append(pic))
+  .catch((err) => root.append(err.message));
