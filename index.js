@@ -1,22 +1,26 @@
-const root = document.getElementById('root');
-
-function loadImage(path, alt) {
-  const image = document.createElement('img');
-  image.src = path;
-  return new Promise((resolve, reject) => {
-    image.addEventListener('load', () => {
-      image.alt = alt;
-      resolve(image);
-    });
-    image.addEventListener('error', () => {
-      reject(new Error('invalid path'));
-    });
-  });
+const user = {
+  login:'fred',
+  email:'fred@gmail.com',
+  age:23,
+  isMale: true,
+  sayHi(){
+    return 'hi, my login '+this.login;
+  },
+  hobbies:['sport','game'],
+  address:{
+    town:'Zp',
+    street:'Qwerty'
+  },
+  property: undefined, // в json не потрапляють!!!
+  description: null
 }
+console.log(user.sayHi());
 
-const path =
-  'https://sb.ecobnb.net/app/uploads/sites/3/2021/09/Progetto-senza-titolo-3.jpg';
-const alt = 'sea';
-loadImage(path, alt)
-  .then((pic) => root.append(pic))
-  .catch((err) => root.append(err.message));
+
+const userInJson = JSON.stringify(user);
+console.log(userInJson)
+
+const jsonTask = `{"login":"fred","email":"fred@gmail.com","age":23,"isMale":true,"hobbies":["sport","game"],"address":{"town":"Zp","street":"Qwerty"},"description":null}`;
+
+const task = JSON.parse(jsonTask);
+console.log(task);
